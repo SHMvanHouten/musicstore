@@ -1,12 +1,10 @@
 package com.github.shmvanhouten.musicstore.Track;
 
-import com.github.shmvanhouten.musicstore.MusicStoreWebApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -24,7 +22,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MusicStoreWebApplication.class)
 @WebMvcTest(TrackResource.class)
 public class TrackResourceTest {
 
@@ -35,9 +32,6 @@ public class TrackResourceTest {
 
     @MockBean
     private TrackService trackService;
-
-    @MockBean
-    TrackRepository trackRepository;
 
 
     @Before
@@ -56,7 +50,7 @@ public class TrackResourceTest {
 
     @Test
     public void itShouldTest() throws Exception {
-        when(trackRepository.getById(anyLong())).thenReturn(track);
+        when(trackService.getById(anyLong())).thenReturn(track);
         mockMvc.perform(get("/track/byId/232").accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                .andExpect(jsonPath("$.name",is("FooBarSpecial")));

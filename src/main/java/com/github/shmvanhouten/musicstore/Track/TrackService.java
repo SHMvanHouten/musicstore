@@ -4,6 +4,8 @@ import com.github.shmvanhouten.musicstore.Album.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TrackService {
     private final TrackRepository trackRepository;
@@ -20,5 +22,17 @@ public class TrackService {
         Long albumId = albumRepository.getIdByTitleAndArtist(track.getAlbumTitle(), track.getArtistName());
         trackRepository.setTrack(id, track, albumId);
         return id;
+    }
+
+    public Track getById(Long trackId) {
+        return trackRepository.getById(trackId);
+    }
+
+    public List<Track> getTracksForArtist(String artistName) {
+        return trackRepository.getTracksForArtist(artistName);
+    }
+
+    public List<Track> getTracksForAlbum(String artistName, String albumName) {
+        return trackRepository.getTracksForAlbum(artistName, albumName);
     }
 }
