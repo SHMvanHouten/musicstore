@@ -16,7 +16,7 @@ public class TrackResource {
     private final TrackService trackService;
 
     @Autowired
-    public TrackResource(TrackRepositoryJdbcTemplateImpl trackRepository, TrackService trackService) {
+    public TrackResource(TrackRepository trackRepository, TrackService trackService) {
         this.trackRepository = trackRepository;
         this.trackService = trackService;
     }
